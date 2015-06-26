@@ -1,0 +1,133 @@
+<div class="form-group">
+    <label for="name">Navn</label>
+    <input ng-model="category.name" type="text" class="form-control" id="name" placeholder="Navn" ng-change="$emit('validate')">
+</div>
+<div class="form-group">
+    <label for="name">Beskrivelse</label>
+    <textarea ng-model="category.description" class="form-control" id="name" placeholder="Beskrivelse" ng-change="$emit('validate')"></textarea>
+</div>
+<div class="form-group">
+    <label for="instruction">Instruktion</label>
+    <textarea ng-model="category.instruction" class="form-control" id="instruction" placeholder="Instruktion" ng-change="$emit('validate')"></textarea>
+</div>
+<div class="form-group">
+    <label>Logo</label>
+    <input type="file" ng-file-select="onFileSelect($files)" class="form-control" id="logo" name="logo">
+    <div class="alert alert-success" role="alert" ng-show="imagesuccess">
+        <p><strong>OK:</strong> {{imagesuccess}}</p>
+    </div>
+</div>
+<div class="form-group" ng-show="imagesrc">
+    <img ng-src="{{imagesrc}}" height="80">
+    <div class="alert alert-danger" role="alert" ng-show="imageerror">
+        <p><strong>Forkert dimension:</strong> {{imageerror}}.</p>
+    </div>
+</div>
+<!--div class="panel panel-default">
+    <div class="panel-heading">
+        <button class="btn btn-xs btn-default pull-right" ng-click="addField()"><i class="fa fa-plus"></i>
+        </button>
+        <h3 class="panel-title"><a ng-click="isListeCollapsed=!isListeCollapsed"><i class="fa" ng-class="{'fa-minus-square-o':!isListeCollapsed,'fa-plus-square-o':isListeCollapsed}"></i></a> Liste</h3>
+    </div>
+    <div class="panel-body" collapse="isListeCollapsed">
+        <div class="form-group">
+            <label for="schema">Liste felter</label>
+            <select class="form-control" id="schema" name="schema" ng-model="schemafield" ng-options="r for r in schemakeys" ng-change="addListField()">
+                <option value="" selected>-- Vælg --</option>
+            </select>
+        </div>
+        <ul class="list-group" ui-sortable ng-model="category.list">
+            <li class="list-group-item" ng-repeat="item in category.list"><a style="color:inherit" class="pull-right" ng-click="removeListField()"><i class="fa fa-close"></i></a>{{item}}</li>
+        </ul>
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <button class="btn btn-xs btn-default pull-right" ng-click="addField()"><i class="fa fa-plus"></i>
+        </button>
+        <h3 class="panel-title"><a style="" ng-click="isFormCollapsed=!isFormCollapsed"><i class="fa" ng-class="{'fa-minus-square-o':!isFormCollapsed,'fa-plus-square-o':isFormCollapsed}"></i></a> Formular</h3>
+    </div>
+    <div class="panel-body" collapse="isFormCollapsed">
+        <div class="form-group">
+            <label>Formular felter</label>
+            <select class="form-control" ng-model="formfield" ng-options="r for r in formkeys" ng-change="addFormField()">
+                <option value="" selected>-- Vælg --</option>
+            </select>
+        </div>
+        <accordion>
+            <div ui-sortable ng-model="category.form">
+                <accordion-group heading="{{item.id}}" ng-repeat="item in category.form" ng-model="category.form">
+                    <field field="item" parent-fields="category.form" schema="schema.properties[item.id]">
+                    </field>
+                </accordion-group>
+            </div>
+        </accordion>
+    </div>
+</div-->
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title"><a style="" ng-click="isMapCollapsed=!isMapCollapsed"><i class="fa" ng-class="{'fa-minus-square-o':!isMapCollapsed,'fa-plus-square-o':isMapCollapsed}"></i></a> Kort</h3>
+    </div>
+    <div class="panel-body" collapse="isMapCollapsed">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <button class="btn btn-xs btn-default pull-right" ng-click="addBaselayer()"><i class="fa fa-plus"></i>
+                        </button>
+                        <h3 class="panel-title"><a style="" ng-click="isBaselayerCollapsed=!isBaselayerCollapsed"><i class="fa" ng-class="{'fa-minus-square-o':!isBaselayerCollapsed,'fa-plus-square-o':isBaselayerCollapsed}"></i></a> Baselayers</h3>
+                    </div>
+                    <div class="panel-body" collapse="isBaselayerCollapsed">
+                        <accordion>
+                            <div ui-sortable ng-model="category.map.baselayers">
+                                <accordion-group heading="{{layer.name}}" ng-repeat="layer in category.map.baselayers" ng-model="category.map.baselayers">
+                                    <layer layer="layer" category="category" is-baselayer="true">
+                                    </layer>
+                                </accordion-group>
+                            </div>
+                        </accordion>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <button class="btn btn-xs btn-default pull-right" ng-click="addOverlay()"><i class="fa fa-plus"></i>
+                        </button>
+                        <h3 class="panel-title"><a style="" ng-click="isOverlaysCollapsed=!isOverlaysCollapsed"><i class="fa" ng-class="{'fa-minus-square-o':!isOverlaysCollapsed,'fa-plus-square-o':isOverlaysCollapsed}"></i></a> Overlays</h3>
+                    </div>
+                    <div class="panel-body" collapse="isOverlaysCollapsed">
+                        <accordion>
+                            <div ui-sortable ng-model="category.map.overlays">
+                                <accordion-group heading="{{layer.name}}" ng-repeat="layer in category.map.overlays" ng-model="category.map.overlays">
+                                    <layer layer="layer" category="category" is-baselayer="false">
+                                    </layer>
+                                </accordion-group>
+                            </div>
+                        </accordion>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div map on-create="mapCreated(map)" style="height:400px;width:100%"></div>
+                <!--div map="category.map" style="height:300px;width:100%" ticket="ticket"></div-->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <button class="btn btn-xs btn-default pull-right" ng-click="addCategory()"><i class="fa fa-plus"></i>
+        </button>
+        <h3 class="panel-title"><a style="" ng-click="isCategoriesCollapsed=!isCategoriesCollapsed"><i class="fa" ng-class="{'fa-minus-square-o':!isCategoriesCollapsed,'fa-plus-square-o':isCategoriesCollapsed}"></i></a> Kategorier</h3>
+    </div>
+    <div class="panel-body" collapse="isCategoriesCollapsed">
+        <accordion>
+            <div ui-sortable ng-model="category.categories">
+                <accordion-group heading="{{item.name}}" ng-repeat="item in category.categories" ng-model="category.categories">
+                    <category category="item" parent-categories="category.categories" database="database" schema="schema" configuration="configuration" ticket="ticket"></category>
+                </accordion-group>
+            </div>
+        </accordion>
+    </div>
+</div>

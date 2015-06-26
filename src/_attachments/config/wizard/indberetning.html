@@ -1,0 +1,39 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title"><a ng-click="isListeCollapsed=!isListeCollapsed"><i class="fa" ng-class="{'fa-minus-square-o':!isListeCollapsed,'fa-plus-square-o':isListeCollapsed}"></i></a> Liste</h3>
+    </div>
+    <div class="panel-body" collapse="isListeCollapsed">
+        <div class="form-group">
+            <label for="schema">Liste felter</label>
+            <select class="form-control" id="schema" name="schema" ng-model="schemafield" ng-options="r for r in schemakeys" ng-change="addListField(r)">
+                <option value="" selected>-- Vælg --</option>
+            </select>
+        </div>
+        <ul class="list-group" ui-sortable ng-model="widget.list">
+            <li class="list-group-item" ng-repeat="item in widget.list"><a style="color:inherit" class="pull-right" ng-click="removeListField()"><i class="fa fa-close"></i></a>{{item}}</li>
+        </ul>
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <button class="btn btn-xs btn-default pull-right" ng-click="addField()"><i class="fa fa-plus"></i>
+        </button>
+        <h3 class="panel-title"><a style="" ng-click="isFormCollapsed=!isFormCollapsed"><i class="fa" ng-class="{'fa-minus-square-o':!isFormCollapsed,'fa-plus-square-o':isFormCollapsed}"></i></a> Formular</h3>
+    </div>
+    <div class="panel-body" collapse="isFormCollapsed">
+        <div class="form-group">
+            <label>Formular felter</label>
+            <select class="form-control" ng-model="formfield" ng-options="r for r in formkeys" ng-change="addFormField(r)">
+                <option value="" selected>-- Vælg --</option>
+            </select>
+        </div>
+        <accordion>
+            <div ui-sortable ng-model="widget.form">
+                <accordion-group heading="{{item.id}}" ng-repeat="item in widget.form" ng-model="widget.form">
+                    <field field="item" parent-fields="widget.form" schema="schema.properties[item.id]">
+                    </field>
+                </accordion-group>
+            </div>
+        </accordion>
+    </div>
+</div>

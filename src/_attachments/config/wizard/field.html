@@ -1,0 +1,76 @@
+<div class="form-group">
+    <label for="type">Type</label>
+    <select class="form-control" class="form-control" id="type" ng-model="field.type" ng-change="changeType()">
+        <option>text</option>
+        <option>textarea</option>
+        <option>checkbox</option>
+        <option>datetime</option>
+        <option>date</option>
+        <option>time</option>
+        <option>timestamp</option>
+        <option>email</option>
+        <option>number</option>
+        <option>radio</option>
+        <option>ruler</option>
+        <option>select</option>
+        <option>url</option>
+        <option>file</option>
+        <option>group</option>
+        <option>geometry</option>
+        <option>Point</option>
+        <option>MultiPoint</option>
+        <option>LineString</option>
+        <option>MultiLineString</option>
+        <option>Polygon</option>
+        <option>MultiPolygon</option>
+    </select>
+</div>
+<div class="form-group">
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" ng-model="field.readonly">Readonly
+        </label>
+    </div>
+</div>
+<div class="panel panel-default" ng-hide="field.type==='geometry'">
+    <div class="panel-heading">
+        <button class="btn btn-xs btn-default pull-right" ng-click="add()"><i class="fa fa-plus"></i>
+        </button>
+        <h3 class="panel-title"><a ng-click="isCategoriesCollapsed=!isCategoriesCollapsed"><i class="fa" ng-class="{'fa-minus-square-o':!isCategoriesCollapsed,'fa-plus-square-o':isCategoriesCollapsed}"></i></a> Felter</h3>
+    </div>
+    <div class="panel-body" collapse="isCategoriesCollapsed">
+        <div class="form-group">
+            <label>Formular felter</label>
+            <select class="form-control" ng-model="formfield" ng-options="r for r in formkeys" ng-change="addFormField()">
+                <option value="" selected>-- Vælg --</option>
+            </select>
+        </div>
+        <accordion>
+            <div ui-sortable ng-model="field.fields">
+                <accordion-group heading="{{item.id}}" ng-repeat="item in field.fields" ng-model="field.fields">
+                    <field field="item" parent-fields="field.fields" schema="schema.properties[item.id]">
+                    </field>
+                </accordion-group>
+            </div>
+        </accordion>
+    </div>
+</div>
+<div class="panel panel-default" ng-show="field.type==='geometry'">
+    <div class="panel-heading">
+        <button class="btn btn-xs btn-default pull-right" ng-click="add()"><i class="fa fa-plus"></i>
+        </button>
+        <h3 class="panel-title"><a ng-click="isCategoriesCollapsed=!isCategoriesCollapsed"><i class="fa" ng-class="{'fa-minus-square-o':!isCategoriesCollapsed,'fa-plus-square-o':isCategoriesCollapsed}"></i></a> Geometrier</h3>
+    </div>
+    <div class="panel-body" collapse="isCategoriesCollapsed">
+        <div class="form-group">
+            <label>Geometri typer</label>
+            <select class="form-control" ng-model="formfield" ng-options="r for r in geometries" ng-change="addGeometry()">
+                <option value="" selected>-- Vælg --</option>
+            </select>
+        </div>
+        <ul class="list-group" ui-sortable ng-model="field.fields">
+            <li class="list-group-item" ng-repeat="item in field.fields"><a style="color:inherit" class="pull-right" ng-click="removeGeometry($index)"><i class="fa fa-close"></i></a>{{item.id}}</li>
+        </ul>
+    </div>
+</div>
+

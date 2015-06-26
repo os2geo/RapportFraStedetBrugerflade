@@ -1,0 +1,284 @@
+<div class="form-group">
+    <label for="id">ID</label>
+    <input type="text" name="id" ng-model="layer.id" class="form-control" id="id" disabled>
+</div>
+<div class="form-group">
+    <label for="name">Navn</label>
+    <input type="text" name="name" ng-model="layer.name" class="form-control" id="name">
+</div>
+<div class="form-group">
+    <label for="description">Beskrivelse (HTML)</label>
+    <textarea name="description" ng-model="layer.description" class="form-control" id="description"></textarea>
+</div>
+<div class="form-group">
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" ng-model="layer.hidden" ng-change="selected()">Skjul i lagkontrol
+        </label>
+    </div>
+</div>
+<!--div class="form-group" ng-if="layer.type==='geojson'">
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" ng-model="layer.tile">Opret tiles
+        </label>
+    </div>
+</div-->
+<div class="form-group">
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" ng-model="layer.selected" ng-change="selected()">Vis ved opstart
+        </label>
+    </div>
+</div>
+<div class="form-group" ng-if="layer.type==='wms' || layer.type==='xyz'">
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" ng-model="layer.ticket">Kræver ticket til Geodatastyrelsen
+        </label>
+    </div>
+</div>
+<div class="form-group">
+    <label for="type">Type</label>
+    <select class="form-control" id="type" ng-model="layer.type" ng-options="r.value as r.key for r in optionsType" ng-change="typeChange()">
+    </select>
+</div>
+
+
+<div class="form-group" ng-class="{ 'has-error': fileError, 'has-success': fileSuccess}" ng-if="layer.type==='geojson' || layer.type==='topojson'">
+    <label for="file">Upload</label>
+    <input type="file" ng-file-select="onFileSelect($files)" class="form-control" id="file" name="file">
+</div>
+<div class="form-group" ng-if="layer.type==='database' || layer.type==='straks'">
+    <label for="database">Database</label>
+    <select class="form-control" id="database" ng-model="layer.database" ng-options="r.id as r.value for r in databases" ng-change="databaseChange()">
+        <option value="" selected>-- Vælg --</option>
+    </select>
+</div>
+<div class="form-group" ng-if="layer.type==='database'">
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" ng-model="layer.replicateFrom">Repliker data fra server til app, så de kan vises offline.
+        </label>
+    </div>
+</div>
+<div class="form-group" ng-if="layer.type==='database'">
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" ng-model="layer.replicateTo">Repliker data fra app til server, så de kan opdateres offline.
+        </label>
+    </div>
+</div>
+<div class="form-group" ng-if="layer.type==='database'">
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" ng-model="layer.offlineOnly">Vis kun offline data.
+        </label>
+    </div>
+</div>
+<div class="form-group" ng-if="layer.type==='database'">
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" ng-model="layer.allowRemove">Tillad sletning.
+        </label>
+    </div>
+</div>
+<div class="form-group" ng-if="layer.type==='straks'">
+    <label for="straks">Straks</label>
+    <select class="form-control" id="straks" ng-model="layer.straks" ng-options="key as value.name for (key, value) in straks">
+        <option value="" selected>-- Vælg --</option>
+    </select>
+</div>
+<div class="form-group" ng-if="layer.type==='mbtiles'">
+    <label for="mbtiles">MBTiles</label>
+    <select class="form-control" ng-model="layer.mbtile" ng-options="r.id as r.value.name for r in mbtiles.rows" ng-change="changeMBTiles(r)">
+        <option value="" selected>-- Vælg --</option>
+    </select>
+</div>
+<div class="form-group" ng-if="layer.type==='xyz'">
+    <label for="type">Projection</label>
+    <select class="form-control" id="epsg" ng-model="layer.epsg" ng-options="r.value as r.key for r in optionsEPSG">
+    </select>
+</div>
+<div class="form-group" ng-if="layer.type==='xyz' || layer.type==='wms'">
+    <label for="url">Url</label>
+    <input type="text" ng-model="layer.url" class="form-control" id="url">
+</div>
+<div class="form-group" ng-if="layer.type==='mbtiles'">
+    <label for="url">Size</label>
+    <p class="form-control-static">{{layer.size | bytes}}</p>
+</div>
+<div class="form-group">
+    <label for="attribution">Attribution</label>
+    <input type="text" name="attribution" ng-model="layer.attribution" class="form-control" id="attribution">
+</div>
+<div class="form-group" ng-if="layer.type==='wms'">
+    <label for="version">version</label>
+    <input type="text" class="form-control" id="version" ng-model="layer.wms.version" placeholde="version">
+</div>
+<div class="form-group" ng-if="layer.type==='wms'">
+    <label for="transparent">transparent</label>
+    <input type="text" class="form-control" id="transparent" ng-model="layer.wms.transparent" placeholde="transaprent">
+</div>
+<div class="form-group" ng-if="layer.type==='wms'">
+    <label for="layers">layers</label>
+    <input type="text" class="form-control" id="layers" ng-model="layer.wms.layers" placeholde="layers">
+</div>
+<div class="form-group" ng-if="layer.type==='wms'">
+    <label for="format">format</label>
+    <input type="text" class="form-control" id="format" ng-model="layer.wms.format" placeholde="format">
+</div>
+<div class="form-group" ng-if="layer.type==='wms'">
+    <label for="styles">styles</label>
+    <input type="text" class="form-control" id="styles" ng-model="layer.wms.styles" placeholde="styles">
+</div>
+<div class="form-group">
+    <label for="options">Options</label>
+    <div class="alert alert-danger alert-dismissible" role="alert" ng-show="textError">
+        <button type="button" class="close" ng-click="error=null"><span aria-hidden="true">&times;</span><span class="sr-only">Luk</span>
+        </button><strong>Fejl:</strong> {{textError}}
+    </div>
+    <textarea name="options" ng-model="options" class="form-control" id="options" ng-change="optionsChange()"></textarea>
+</div>
+<div class="form-group">
+    <label for="selectZoom">Zoom level ved udvælgelse</label>
+    <input type="number" ng-model="layer.selectZoom" class="form-control" id="selectZoom">
+</div>
+<div class="form-group">
+    <label for="minZoom">minZoom</label>
+    <input type="number" ng-model="layer.minZoom" class="form-control" id="minZoom">
+</div>
+<div class="form-group">
+    <label for="maxZoom">maxZoom</label>
+    <input type="number" ng-model="layer.maxZoom" class="form-control" id="maxZoom">
+</div>
+<div class="form-group" ng-if="isBaselayer">
+    <label for="bounds">Bounds</label>
+    <div class="row">
+        <div class="col-md-3">
+            <label>X low</label>
+            <input type="number" ng-model="layer.bounds[0][1]" class="form-control">
+        </div>
+        <div class="col-md-3">
+            <label>Y low</label>
+            <input type="number" ng-model="layer.bounds[0][0]" class="form-control">
+        </div>
+        <div class="col-md-3">
+            <label>X high</label>
+            <input type="number" ng-model="layer.bounds[1][1]" class="form-control">
+        </div>
+        <div class="col-md-3">
+            <label>Y high</label>
+            <input type="number" ng-model="layer.bounds[1][0]" class="form-control">
+        </div>
+    </div>
+</div>
+
+<div class="panel panel-default" ng-if="layer.type==='database'">
+    <div class="panel-heading">
+        <h3 class="panel-title"><a ng-click="isListeCollapsed=!isListeCollapsed"><i class="fa" ng-class="{'fa-minus-square-o':!isListeCollapsed,'fa-plus-square-o':isListeCollapsed}"></i></a> Liste</h3>
+    </div>
+    <div class="panel-body" collapse="isListeCollapsed">
+        <div class="form-group">
+            <label for="schema">Liste felter</label>
+            <select class="form-control" id="schema" name="schema" ng-model="schemafield" ng-options="r for r in schemakeys" ng-change="addListField(r)">
+                <option value="" selected>-- Vælg --</option>
+            </select>
+        </div>
+        <ul class="list-group" ui-sortable ng-model="layer.list">
+            <li class="list-group-item" ng-repeat="item in layer.list"><a style="color:inherit" class="pull-right" ng-click="removeListField()"><i class="fa fa-close"></i></a>{{item}}</li>
+        </ul>
+    </div>
+</div>
+<div class="panel panel-default" ng-if="layer.type==='database'">
+    <div class="panel-heading">
+        <h3 class="panel-title"><a style="" ng-click="isFormCollapsed=!isFormCollapsed"><i class="fa" ng-class="{'fa-minus-square-o':!isFormCollapsed,'fa-plus-square-o':isFormCollapsed}"></i></a> Formular</h3>
+    </div>
+    <div class="panel-body" collapse="isFormCollapsed">
+        <div class="form-group">
+            <label>Formular felter</label>
+            <select class="form-control" ng-model="formfield" ng-options="r for r in formkeys" ng-change="addFormField(r)">
+                <option value="" selected>-- Vælg --</option>
+            </select>
+        </div>
+        <accordion>
+            <div ui-sortable ng-model="layer.form">
+                <accordion-group heading="{{item.id}}" ng-repeat="item in layer.form" ng-model="layer.form">
+                    <field field="item" parent-fields="layer.form" schema="schema.properties[item.id]">
+                    </field>
+                </accordion-group>
+            </div>
+        </accordion>
+    </div>
+</div>
+
+<div class="panel panel-default" ng-if="layer.type==='database'">
+    <div class="panel-heading">
+        <h3 class="panel-title"><a ng-click="isSelectionStyleCollapsed=!isSelectionStyleCollapsed"><i class="fa" ng-class="{'fa-minus-square-o':!isThemeCollapsed,'fa-plus-square-o':isSelectionStyleCollapsed}"></i></a> Selection style</h3>
+    </div>
+    <div class="panel-body" collapse="isSelectionStyleCollapsed">
+        <layer-style layer-style="layer.selectionStyle" layer="layer" schema="schema">
+        </layer-style>
+    </div>
+</div>
+
+
+<div class="panel panel-default" ng-if="layer.type==='topojson' || layer.type==='geojson' || layer.type==='database' || layer.type==='straks'">
+    <div class="panel-heading">
+        <button class="btn btn-xs btn-default pull-right" ng-click="addStyle()"><i class="fa fa-plus"></i>
+        </button>
+        <h3 class="panel-title"><a ng-click="isThemeCollapsed=!isThemeCollapsed"><i class="fa" ng-class="{'fa-minus-square-o':!isThemeCollapsed,'fa-plus-square-o':isThemeCollapsed}"></i></a> Tematisering</h3>
+    </div>
+    <div class="panel-body" collapse="isThemeCollapsed">
+        <div class="form-group">
+            <label for="themefield">Værdi felt</label>
+            <select class="form-control" id="themefield" ng-model="themefield" ng-options="r for r in themekeys" ng-change="themefieldChange()">
+                <option value="" selected>-- Vælg --</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Farveskema</label>
+            <div>
+                <span class="palette" ng-class="{'paletteactive':selectedPalette === $index}" ng-repeat="palette in colorbrewer" ng-click="selectPalette()"><span class="swatch" ng-style="{'background-color': swatch}" ng-repeat="swatch in palette | max:layer.styles.length"></span></span>
+            </div>
+        </div>
+        <accordion>
+            <div ui-sortable ng-model="layer.styles">
+                <accordion-group heading="{{item.id}}" ng-repeat="item in layer.styles" ng-model="layer.styles">
+                    <layer-style layer-style="item" layer="layer" schema="schema">
+                    </layer-style>
+                </accordion-group>
+            </div>
+        </accordion>
+        <div class="form-group">
+            <label for="style">style</label>
+            <textarea ng-model="style" class="form-control" id="style" ng-change="styleChange()"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="pointToLayer">pointToLayer</label>
+            <textarea ng-model="pointToLayer" class="form-control" id="pointToLayer" ng-change="pointToLayerChange()"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="onEachFeature">onEachFeature</label>
+            <textarea ng-model="onEachFeature" class="form-control" id="onEachFeature" ng-change="onEachFeatureChange()"></textarea>
+        </div>
+        <div class="form-group">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="layer.markercluster">Markercluster
+                </label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="maxZoom">Disable clustering at zoom</label>
+            <input type="number" ng-model="layer.disableClusteringAtZoom" class="form-control" id="disableClusteringAtZoom">
+        </div>
+        <div class="form-group">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="layer.mouseover">Mouseover
+                </label>
+            </div>
+        </div>
+    </div>
+</div>

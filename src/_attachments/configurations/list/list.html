@@ -1,0 +1,16 @@
+<div class="table-responsive">
+    <table class="table table-striped">
+        <tr>
+            <th></th>
+            <th><i class="fa fa-gears"></i> Konfigurationer</th>
+        </tr>
+        <tr ng-repeat="item in configurations|filter:design">
+            <td>
+                <a ui-sref="config({organization:organization,configuration:item.id})"><img ng-src="/couchdb/{{db}}/{{item.id}}/logo">
+                </a>
+            </td>
+            <td><a ui-sref="config.info({organization:organization,configuration:item.id})"><i class="fa fa-gear"></i> {{item.doc.name}}</a>
+            </td>
+        </tr>
+    </table>
+</div>

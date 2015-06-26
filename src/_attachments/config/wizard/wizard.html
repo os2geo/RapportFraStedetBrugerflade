@@ -1,0 +1,111 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title"><a style="" ng-click="isMapCollapsed=!isMapCollapsed"><i class="fa" ng-class="{'fa-minus-square-o':!isMapCollapsed,'fa-plus-square-o':isMapCollapsed}"></i></a> Kort</h3>
+    </div>
+    <div class="panel-body" collapse="isMapCollapsed">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <button class="btn btn-xs btn-default pull-right" ng-click="addBaselayer()"><i class="fa fa-plus"></i>
+                        </button>
+                        <h3 class="panel-title"><a style="" ng-click="isBaselayerCollapsed=!isBaselayerCollapsed"><i class="fa" ng-class="{'fa-minus-square-o':!isBaselayerCollapsed,'fa-plus-square-o':isBaselayerCollapsed}"></i></a> Baselayers</h3>
+                    </div>
+                    <div class="panel-body" collapse="isBaselayerCollapsed">
+                        <accordion>
+                            <div ui-sortable ng-model="doc.map.baselayers">
+                                <accordion-group heading="{{layer.name}}" ng-repeat="layer in doc.map.baselayers" ng-model="doc.map.baselayers">
+                                    <layer layer="layer" configuration="doc" is-baselayer="true">
+                                    </layer>
+                                </accordion-group>
+                            </div>
+                        </accordion>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <button class="btn btn-xs btn-default pull-right" ng-click="addOverlay()"><i class="fa fa-plus"></i>
+                        </button>
+                        <h3 class="panel-title"><a style="" ng-click="isOverlaysCollapsed=!isOverlaysCollapsed"><i class="fa" ng-class="{'fa-minus-square-o':!isOverlaysCollapsed,'fa-plus-square-o':isOverlaysCollapsed}"></i></a> Overlays</h3>
+                    </div>
+                    <div class="panel-body" collapse="isOverlaysCollapsed">
+                        <accordion>
+                            <div ui-sortable ng-model="doc.map.overlays">
+                                <accordion-group heading="{{layer.name}}" ng-repeat="layer in doc.map.overlays" ng-model="doc.map.overlays">
+                                    <layer layer="layer" configuration="doc" is-baselayer="false">
+                                    </layer>
+                                </accordion-group>
+                            </div>
+                        </accordion>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div map on-create="mapCreated(map)" style="height:400px;width:100%"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><a ng-click="isWidgetsCollapsed=!isWidgetsCollapsed"><i class="fa" ng-class="{'fa-minus-square-o':!isWidgetsCollapsed,'fa-plus-square-o':isWidgetsCollapsed}"></i></a> Widgets</h3>
+            </div>
+            <div class="panel-body" collapse="isWidgetsCollapsed">
+                <div class="form-group">
+                    <label for="widget">Widget</label>
+                    <select class="form-control" id="widget" name="widget" ng-model="widget" ng-options="key as key for (key, value) in widgets" ng-change="addWidget(key)">
+                        <option value="" selected>-- Vælg --</option>
+                    </select>
+                </div>
+                <accordion>
+                    <div ui-sortable ng-model="doc.widgets">
+                        <accordion-group heading="{{item.id}}" ng-repeat="item in doc.widgets" ng-model="doc.widgets">
+                            <widget widget="item" configuration="doc">
+                            </widget>
+                        </accordion-group>
+                    </div>
+                </accordion>
+            </div>
+        </div>
+    </div>
+
+
+<!--/div>
+<div class="row"-->
+    <div class="col-sm-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><a ng-click="isSecurityCollapsed=!isSecurityCollapsed"><i class="fa" ng-class="{'fa-minus-square-o':!isSecurityCollapsed,'fa-plus-square-o':isSecurityCollapsed}"></i></a> Sikkerhed</h3>
+            </div>
+            <div class="panel-body" collapse="isSecurityCollapsed">
+                <p>Vælg brugere som må anvende konfigurationen, der kræves hermed login. Hvis der ikke er valgt nogle brugere, så må alle anvende konfigurationen og der kræves ikke login.</p>
+                <div class="alert alert-success alert-dismissible" role="alert" ng-show="success">
+                    <button type="button" class="close" ng-click="success=null"><span aria-hidden="true">&times;</span><span class="sr-only">Luk</span>
+                    </button><strong>OK:</strong> {{success}}.
+                </div>
+                <div class="alert alert-danger alert-dismissible" role="alert" ng-show="error">
+                    <button type="button" class="close" ng-click="error=null"><span aria-hidden="true">&times;</span><span class="sr-only">Luk</span>
+                    </button><strong>Fejl:</strong> {{error}}
+                </div>
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Tillad</th>
+                            <th>Bruger</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="(key,value) in users">
+                            <td>
+                                <input type="checkbox" ng-change="change()" ng-model="users[key]">
+                            </td>
+                            <td>{{key}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
