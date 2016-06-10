@@ -7,7 +7,7 @@ module.exports = function (grunt) {
         'couch-compile': {
             "rfs2": {
                 files: {
-                    'tmp/rfs2.json': ['src']
+                    'tmp/rfs2.json': ['src/app-d2121ee08caf832b73a160f9ea022ad9']
                 }
             }
         },

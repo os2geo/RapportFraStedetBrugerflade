@@ -1,0 +1,95 @@
+<div class="form-group">
+    <label for="id">id</label>
+    <input type="text" ng-model="layerStyle.id" class="form-control" id="id">
+</div>
+
+<div class="form-group">
+    <label for="pointType">pointType</label>
+    <select class="form-control" id="pointType" ng-model="layerStyle.pointType" ng-options="r for r in pointTypeOptions">
+    </select>
+</div>
+<div class="form-group" ng-show="layerStyle.pointType==='maki'">
+    <label for="icon">Maki icon</label>
+    <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1" ng-click="makiHelp()">?</span>
+        <input type="text" ng-model="layerStyle.style.icon" class="form-control" id="icon">
+    </div>
+</div>
+<div class="form-group" ng-show="layerStyle.pointType==='maki'">
+    <label for="icon">Maki size</label>
+    <select class="form-control" id="size" ng-model="layerStyle.style.size" ng-options="r for r in makiSizeOptions">
+    </select>
+</div>
+<div class="form-group" ng-if="layerStyle.pointType=='circle'">
+    <label for="radius">radius (meter)</label>
+    <input type="number" ng-model="layerStyle.style.radius" class="form-control" id="radius">
+</div>
+<div class="form-group" ng-if="layerStyle.pointType=='circleMarker'">
+    <label for="radius">radius (pixel)</label>
+    <input type="number" ng-model="layerStyle.style.radius" class="form-control" id="radius">
+</div>
+<div class="form-group">
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" ng-model="layerStyle.style.stroke">stroke
+        </label>
+    </div>
+</div>
+<div class="form-group">
+    <label for="color">color</label>
+    <input type="color" ng-model="layerStyle.style.color" class="form-control" id="color">
+</div>
+<div class="form-group">
+    <label for="weight">weight</label>
+    <input type="number" ng-model="layerStyle.style.weight" class="form-control" id="weight">
+</div>
+<div class="form-group">
+    <label for="opacity">opacity</label>
+    <input type="number" ng-model="layerStyle.style.opacity" class="form-control" id="opacity">
+</div>
+<div class="form-group">
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" ng-model="layerStyle.style.fill">fill
+        </label>
+    </div>
+</div>
+<div class="form-group">
+    <label for="fillColor">fillColor</label>
+    <input type="color" ng-model="layerStyle.style.fillColor" class="form-control" id="fillColor">
+</div>
+<div class="form-group">
+    <label for="fillOpacity">fillOpacity</label>
+    <input type="number" ng-model="layerStyle.style.fillOpacity" class="form-control" id="fillOpacity">
+</div>
+<div class="form-group">
+    <label for="dashArray">dashArray</label>
+    <input type="text" ng-model="layerStyle.style.dashArray" class="form-control" id="dashArray">
+</div>
+<div class="form-group">
+    <label for="lineCap">lineCap</label>
+    <select class="form-control" id="lineCap" ng-model="layerStyle.style.lineCap" ng-options="r for r in lineCapOptions">
+        <option value="" selected>-- Vælg --</option>
+    </select>
+</div>
+<div class="form-group">
+    <label for="lineJoin">lineJoin</label>
+    <select class="form-control" id="lineJoin" ng-model="layerStyle.style.lineJoin" ng-options="r for r in lineJoinOptions">
+        <option value="" selected>-- Vælg --</option>
+    </select>
+</div>
+<div class="form-group">
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" ng-model="layerStyle.style.clickable">clickable
+        </label>
+    </div>
+</div>
+<div class="form-group">
+    <label for="lineJoin">Vis som</label>
+    <select class="form-control" id="displayAs" ng-model="layerStyle.displayAs">
+        <option value="Point">Punkt</option>
+        <option value="Line">Linje</option>
+        <option value="Polygon">Polygon</option>
+    </select>
+</div>

@@ -1,0 +1,16 @@
+<div class="modal-header">
+    <h3 class="modal-title">Maki Icons</h3>
+    <p>Bruge talene 0-99 eller bogstaverne a-z eller et af nedenstående symboler</p>
+</div>
+<div class="modal-body">
+    <div ng-repeat="item in icons">
+        <div class="maki-icon pull-left" ng-class="[item.icon, item.icon==maki?'bg-danger':'']" ng-click="makiSelect(item)"></div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<div class="modal-footer ">
+        <p class="pull-left">Valgt: {{maki}}</p>
+
+    <button class="btn btn-primary " ng-click="ok() ">OK</button>
+    <button class="btn btn-warning " ng-click="cancel() ">Cancel</button>
+</div>
