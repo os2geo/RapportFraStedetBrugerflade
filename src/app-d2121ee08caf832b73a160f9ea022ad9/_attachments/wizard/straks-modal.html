@@ -1,0 +1,48 @@
+<form novalidate class="form-horizontal" role="form" name="myform" ng-submit="submit(myform)">
+    <div class="modal-header">
+        <h3 class="modal-title">Tilføj indberetningsområde</h3>
+    </div>
+    <div class="modal-body">
+
+        <div class="form-group has-feedback" ng-class="{ 'has-error': myform.name.$error.required && myform.$submitted, 'has-success': myform.name.$valid && myform.$submitted}">
+            <label for="name" class="col-sm-2 control-label">Navn</label>
+            <div class="col-sm-10">
+                <input name="name" ng-model="doc.name" type="text" class="form-control" id="name" placeholder="Navn" required>
+                <span ng-show="myform.name.$valid && !myform.name.$pristine" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                <span ng-show="myform.name.$error.required && myform.$submitted" class="help-block">Navn er påkrævet!</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="description" class="col-sm-2 control-label">Beskrivelse</label>
+            <div class="col-sm-10">
+                <textarea name="description" ng-model="doc.description" class="form-control" id="description" placeholder="Beskrivelse"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="link" class="col-sm-2 control-label">Link</label>
+            <div class="col-sm-10">
+                <input type="url" name="link" ng-model="doc.link" class="form-control" id="link">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" ng-model="doc.inside">Indenfor
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': fileError, 'has-success': fileSuccess}">
+            <label for="logo" class="col-sm-2 control-label">Upload</label>
+            <div class="col-sm-10">
+                <input type="file" ng-file-select="onFileSelect($files)" class="form-control" id="logo" name="logo" required>
+                <span ng-show="fileError" class="help-block">Fil er påkrævet!</span>
+            </div>
+        </div>            
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-warning" ng-click="cancel()">Fortryd</button>
+        <button type="submit" class="btn btn-primary">OK</button>
+    </div>
+</form>

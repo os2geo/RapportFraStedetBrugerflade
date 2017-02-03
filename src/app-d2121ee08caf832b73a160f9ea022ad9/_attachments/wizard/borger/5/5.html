@@ -1,0 +1,95 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">5. Formular</h3>
+    </div>
+    <div class="panel-body">
+        <div class="alert alert-warning" role="alert">
+            <p>Angiv felter i indberetningsformularen.</p>
+            <p><strong><span class="glyphicon glyphicon-sort" aria-hidden="true"></span></strong> Drag og drop for at ændre
+                rækkefølgen.
+            </p>
+            <p><strong><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></strong> Sletter række.</p>
+            <p><strong>Name</strong> angiver feltnavnet i databasen.</p>
+            <p><strong>Title</strong> angiver den viste titel. Hvis der ikke angives en titel, så bruges <strong>Name</strong> som titel. (F.eks.: Ønsker du at modtage en email-kvittering?)</p>
+            <p><strong>Required</strong> angiver om det er påkrævet at udfylde dette felt.</p>
+            <p><strong>Formular</strong> Vis feltet i indberetningsformularen.</p>
+            <p><strong>Popup/Liste</strong> Vis feltet i popup viduet i kortet og liste visningen.</p>
+        </div>
+        <p>
+            <button type="button" class="btn btn-warning" ng-click="addDataField()">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Tlføj
+            </button>
+        </p>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th>Name</th>
+                        <th>Title</th>
+                        <th>Type</th>
+                        <th>Default Value</th>
+                        <th>Required</th>
+                        <th>Formular</th>
+                        <th>Popup/Liste</th>
+                    </tr>
+                </thead>
+                <tbody ui-sortable ng-model="fields">
+                    <tr ng-repeat="field in fields">
+                        <td>
+                            <span class="glyphicon glyphicon-sort" aria-hidden="true"></span>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-default btn-sm" ng-click="removeDataField(field)">
+                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                        </button>
+                        </td>
+                        <td><input type="text" class="form-control" ng-model="field.name" ng-change="fieldNameChanged(field)"></td>
+                        <td><input type="text" class="form-control" ng-model="field.title" ng-change="fieldTitleChanged(field)"></td>
+                        <td>
+                            <select class="form-control" ng-model="field.type" ng-change="fieldTypeChanged(field)">
+                            <option value="text">Textbox</option>
+                            <option value="textarea">Textarea</option>
+                            <option value="checkbox">Checkbox</option>
+                            <option value="radio">Radiobutton</option>                                                                    
+                            <option value="date">Datepicker</option>
+                            <option value="timestamp">Timestamp</option>
+                            <option value="email">Email</option>
+                        </select>
+
+                        </td>
+                        <td>
+                            <div ng-show="field.type==='radio'">
+                                <div class="input-group">
+                                    <span class="input-group-btn">
+                                    <button ng-click="addEnums($index)" class="btn btn-default" type="button"><span class="glyphicon glyphicon-pencil"></span></button>
+                                    </span>
+                                    <select class="form-control" ng-model="field.default" ng-options="item for item in field.enum track by item" ng-change="fieldDefaultChanged(field)">                    
+                                </select>
+                                </div>
+                            </div>
+                            <div ng-show="field.type==='checkbox'">
+                                <input type="checkbox" ng-model="field.default" ng-change="fieldDefaultChanged(field)">
+                            </div>
+                            <div ng-show="field.type==='text' || field.type==='textarea'">
+                                <input type="text" class="form-control" ng-model="field.default" ng-change="fieldDefaultChanged(field)">
+                            </div>
+                            <div ng-show="field.type==='date'">
+                                <input type="datetime" class="form-control" ng-model="field.default" ng-change="fieldDefaultChanged(field)">
+                            </div>
+                            <div ng-show="field.type==='email'">
+                                <input type="email" class="form-control" ng-model="field.default" ng-change="fieldDefaultChanged(field)">
+                            </div>
+                        </td>
+                        <td><input type="checkbox" ng-model="field.required" ng-change="fieldRequiredChanged(field)"></td>
+                        <td><input type="checkbox" ng-model="field.form"></td>
+                        <td><input type="checkbox" ng-model="field.list"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <button ng-click="previous()" type="button" class="btn btn-success">Forrige</button>
+        <button ng-click="next()" type="button" class="btn btn-success pull-right">Næste</button>
+    </div>
+</div>

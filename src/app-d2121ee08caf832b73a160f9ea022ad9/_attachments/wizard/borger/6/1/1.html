@@ -1,0 +1,120 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">6.1 Borger email opsætning</h3>
+    </div>
+    <div class="panel-body">
+        <div class="alert alert-warning" role="alert">
+            <p>Angiv en overskrift som vises i email emnefeltet, samt en beskrivelse som vises i email teksten.</p>
+            <p>Vælg et emailfelt fra formularen. Når borgeren har indtastet en email adresse i dette felt i formularen, så er
+                det denne adresse der sendes en email kvittering til.</p>
+            <p>Vælg evt. et kvitteringsfelt fra formularen. Herved sendes der kun email kvittering til borgeren, hvis der er
+                indtastet en email adresse og borgeren har sat flueben i kvitteringsfeltet.</p>
+        </div>
+        <form novalidate class="form-horizontal" role="form" name="myform" ng-submit="submit(myform)">
+            <div class="form-group has-feedback" ng-class="{ 'has-error': myform.name.$error.required && myform.$submitted, 'has-success': myform.name.$valid && myform.$submitted}">
+                <label for="name" class="col-sm-2 control-label">Overskrift</label>
+                <div class="col-sm-10">
+                    <input name="name" ng-model="wizard.email.borger.name" type="text" class="form-control" id="name" placeholder="Navn" required>
+                    <span ng-show="myform.name.$valid && !myform.name.$pristine" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                    <span ng-show="myform.name.$error.required && myform.$submitted" class="help-block">Navn er påkrævet!</span>
+                </div>
+            </div>
+            <div class="form-group has-feedback" ng-class="{ 'has-error': myform.description.$error.required && myform.$submitted, 'has-success': myform.description.$valid && myform.$submitted}">
+                <label for="description" class="col-sm-2 control-label">Beskrivelse</label>
+                <div class="col-sm-10">
+                    <textarea name="description" ng-model="wizard.email.borger.description" class="form-control" id="description" placeholder="Beskrivelse"
+                        required></textarea>
+                    <span ng-show="myform.description.$valid && !myform.description.$pristine" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                    <span ng-show="myform.description.$error.required && myform.$submitted" class="help-block">Beskrivelse er påkrævet!</span>
+                </div>
+            </div>
+            <div class="form-group has-feedback" ng-class="{ 'has-error': myform.sender.$error.required && myform.$submitted, 'has-success': myform.sender.$valid && myform.$submitted}">
+                <label for="sender" class="col-sm-2 control-label">Hilsen</label>
+                <div class="col-sm-10">
+                    <textarea name="sender" ng-model="wizard.email.borger.sender" class="form-control" id="sender" placeholder="Hilsen" required></textarea>
+                    <span ng-show="myform.sender.$valid && !myform.description.$pristine" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                    <span ng-show="myform.sender.$error.required && myform.$submitted" class="help-block">Hilsen er påkrævet!</span>
+                </div>
+            </div>
+            <div class="form-group has-feedback" ng-class="{ 'has-error': myform.email.$error.required && myform.$submitted, 'has-success': myform.email.$valid && myform.$submitted}">
+                <label for="email" class="col-sm-2 control-label">Email felt</label>
+                <div class="col-sm-10">
+                    <select name="email" id="email" class="form-control" ng-model="wizard.email.borger.email" ng-options="item as item.name for item in fields | filter:{type:'email'} track by item.name"
+                        required>                    
+                        <option value="">-- Vælg email felt --</option>
+                    </select>
+                    <span ng-show="myform.email.$valid && !myform.email.$pristine" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                    <span ng-show="myform.email.$error.required && myform.$submitted" class="help-block">Email er påkrævet!</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="receipt" class="col-sm-2 control-label">Kvittering felt</label>
+                <div class="col-sm-10">
+                    <select name="receipt" id="receipt" class="form-control" ng-model="wizard.email.borger.receipt" ng-options="item as item.name for item in fields | filter:{type:'checkbox'} track by item.name">                    
+                        <option value="">-- Vælg kvittering felt --</option>
+                    </select>
+                </div>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <h4>Har du glemt at tilføje email- og kvitteringsfeltet</h4>
+                <p>Herunder har du mulighed for at tilføje felter til email og kvittering til formularen.</p>
+                <p>Angiv rækkefølgen af felter i formularen ved at drag/drop felterne.</p>
+                <p>Der kan angives default værdier for email og kvittering.</p>
+            </div>
+            <p>
+                <button type="button" class="btn btn-info" ng-click="addEmailField()">Tlføj email felt</button>
+                <button type="button" class="btn btn-warning" ng-click="addReceiptField()">Tlføj kvitering felt</button>
+            </p>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th>Name</th>
+                            <th>Title</th>
+
+                            <th>Default Value</th>
+                            <th>Required</th>
+                            <th>Formular</th>
+                            <th>Popup/Liste</th>
+                        </tr>
+                    </thead>
+                    <tbody ui-sortable="sortableOptions" ng-model="fields">
+                        <tr ng-repeat="field in fields" ng-class="{'bg-info':field.type==='email', 'bg-warning':field.type==='checkbox'}">
+                            <td>
+                                <span class="glyphicon glyphicon-sort" aria-hidden="true"></span>
+                            </td>
+                            <td>
+                                <button ng-if="field.type==='email' || field.type==='checkbox'" type="button" class="btn btn-default btn-sm" ng-click="removeDataField(field)">
+                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                        </button>
+                            </td>
+                            <td><span ng-if="!(field.type==='email' || field.type=='checkbox')">{{field.name}}</span><input ng-if="field.type==='email' || field.type==='checkbox'"
+                                    type="text" class="form-control" ng-model="field.name" ng-change="fieldNameChanged(field)"></td>
+                            <td><span ng-if="!(field.type==='email' || field.type=='checkbox')">{{field.title}}</span>
+                                <input ng-if="field.type==='email' || field.type==='checkbox'" type="text" class="form-control" ng-model="field.title" ng-change="fieldTitleChanged(field)"></td>
+                            <td>
+                                <span ng-if="!(field.type==='email' || field.type=='checkbox')">{{field.default}}</span>
+                                <div ng-if="field.type==='checkbox'">
+                                    <input type="checkbox" ng-model="field.default" ng-change="fieldDefaultChanged(field)">
+                                </div>
+                                <div ng-if="field.type==='email'">
+                                    <input type="email" class="form-control" ng-model="field.default" ng-change="fieldDefaultChanged(field)">
+                                </div>
+                            </td>
+                            <td><span class="glyphicon glyphicon-ok" ng-if="field.required && !(field.type==='email' || field.type=='checkbox')"></span>
+                                <input ng-if="field.type==='email'" type="checkbox" ng-model="field.required" ng-change="fieldRequiredChanged(field)"></td>
+                            <td><span class="glyphicon glyphicon-ok" ng-if="field.form && !(field.type==='email' || field.type=='checkbox')"></span>
+                                <input ng-if="field.type==='email' || field.type==='checkbox'" type="checkbox" ng-model="field.form" ng-change="fieldFormChanged(field)"></td>
+                            <td><span class="glyphicon glyphicon-ok" ng-if="field.list && !(field.type==='email' || field.type=='checkbox')"></span>
+                                <input ng-if="field.type==='email' || field.type==='checkbox'" type="checkbox" ng-model="field.list" ng-change="fieldListChanged(field)"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <button ng-click="previous()" type="button" class="btn btn-success">Forrige</button>
+            <button type="submit" class="btn btn-success pull-right">Næste</button>
+        </form>
+    </div>
+</div>

@@ -34,3 +34,214 @@ a:hover {
 .paletteactive {
     box-shadow: 0 0 5px rgba(0, 0, 255, 1);
 }
+.list-group-item.active a {
+  color: white;
+  text-decoration: none;
+}
+.list-group-item a {
+  text-decoration: none;
+}
+.list-group-item a:hover {
+  text-decoration: none;
+}
+.wizard {
+  padding-left: 0;
+  
+  list-style: none;
+}
+.wizard::before {
+    display:table;
+    content: " "
+}
+
+.wizard::after {
+    clear:both;
+        display:table;
+    content: " "
+
+}
+.step1 > a{
+    background-color: #eee;
+}
+.step2 > a{
+    background-color: #ddd;
+}
+.step3> a{
+    background-color: #ccc;
+}
+.step4> a{
+    background-color: #bbb;
+}
+
+/*.step2::before {
+
+	top: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+	border-color: rgba(136, 183, 213, 0);
+	border-left-color: #88b7d5;
+	border-width: 30px;
+	margin-top: -30px;
+}*/
+.wizard > li {
+  float: left;
+  position: relative;
+  display: block;
+  height: 60px;
+  font-size: 24px;
+  line-height: 60px;
+}
+.wizard > li > a {
+    color:#555;
+    position: relative;
+    display: block;  
+}
+.step1 > a:after{
+    left:100%;
+	top: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+	border-left-color: #eee;
+	border-width: 30px;
+	margin-top: -30px;
+    z-index: 100;
+}
+.step2 > a:after{
+    left:100%;
+	top: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+	border-left-color: #ddd;
+	border-width: 30px;
+	margin-top: -30px;
+    z-index: 100;
+}
+.step3 > a:after{
+    left:100%;
+	top: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+	border-left-color: #ccc;
+	border-width: 30px;
+	margin-top: -30px;
+    z-index: 100;
+}
+.step4 > a:after{
+    left:100%;
+	top: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+	border-left-color: #bbb;
+	border-width: 30px;
+	margin-top: -30px;
+    z-index: 100;
+}
+
+.step1 > a {
+  padding: 0px 15px 0px 30px;
+}
+.step2 > a {
+  padding: 0px 15px 0px 60px;
+}
+.step3 > a {
+  padding: 0px 15px 0px 60px;
+}
+.step4 > a {
+  padding: 0px 15px 0px 60px;
+}
+.wizard > li.active > a {
+  background-color: #428bca;
+  color: #fff;
+}
+.wizard > li.active > a:after {
+  left:100%;
+	top: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+	border-left-color: #428bca;
+	border-width: 30px;
+	margin-top: -30px;
+    z-index: 100;
+}
+  
+.wizard > li > a:hover,
+.wizard > li > a:focus {
+  text-decoration: none;  
+}
+.wizard > li > a:hover {
+    background-color: #ec971f;
+    color:#fff;
+}
+
+.wizard > li > a:hover:after {
+    left:100%;
+	top: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+	border-left-color: #ec971f;
+	border-width: 30px;
+	margin-top: -30px;
+    z-index: 100;
+}
+
+.nav-tabs > li > a {
+  margin-right: 2px;
+  line-height: 1.42857143;
+  border: 1px solid transparent;
+  border-radius: 4px 4px 0 0;
+}
+.nav-tabs > li > a:hover {
+  border-color: #eee #eee #ddd;
+}
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus {
+  color: #555;
+  cursor: default;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-bottom-color: transparent;
+}
+.nav-tabs.nav-justified {
+  width: 100%;
+  border-bottom: 0;
+}
+.nav-tabs.nav-justified > li {
+  float: none;
+}
+.nav-tabs.nav-justified > li > a {
+  margin-bottom: 5px;
+  text-align: center;
+}
+.nav-tabs.nav-justified > .dropdown .dropdown-menu {
+  top: auto;
+  left: auto;
+}

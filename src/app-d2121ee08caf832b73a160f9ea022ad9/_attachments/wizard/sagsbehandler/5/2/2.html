@@ -1,0 +1,25 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">5.2 sagsbehandlere</h3>
+    </div>
+    <div class="panel-body">
+        <div class="alert alert-warning" role="alert">
+            <p>Tilføj sagsbehandlere fra listen som skal modtage en email.</p>
+        </div>
+
+        <div class="form-group">
+            <label for="users">Tilføj person</label>
+
+            <select class="form-control" id="users" name="users" ng-model="user" ng-options="key as key + ' ' + value for (key,value) in users"
+                ng-change="addUser()">
+                <option value="" selected>-- Vælg --</option>
+            </select>
+
+        </div>
+        <emailuser ng-repeat="(key, value) in wizard.email.sagsbehandler.users" user="wizard.email.sagsbehandler.users[key]" key="key"
+            allusers="allusers" remove-user="removeUser(key)"></emailuser>
+
+        <button ng-click="previous()" type="button" class="btn btn-success">Forrige</button>
+        <button ng-click="next()" class="btn btn-success pull-right">Næste</button>
+    </div>
+</div>

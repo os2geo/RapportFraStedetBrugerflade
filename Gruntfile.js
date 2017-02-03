@@ -21,6 +21,15 @@ module.exports = function (grunt) {
                     'http://geo.os2geo.dk/couchdb/app-d2121ee08caf832b73a160f9ea022ad9': 'tmp/rfs2.json'
                 }
             },
+            "rfs2-test": {
+                options: {
+                    user: '<%= config.couchdb.user %>',
+                    pass: '<%= config.couchdb.password %>'
+                },
+                files: {
+                    'http://test.geo.os2geo.dk/couchdb/app-d2121ee08caf832b73a160f9ea022ad9': 'tmp/rfs2.json'
+                }
+            },
             "rfs2-local": {
                 options: {
                     user: '<%= config.local.user %>',
@@ -35,6 +44,7 @@ module.exports = function (grunt) {
 
     // Load the plugin that provides the "uglify" task.
     grunt.loadNpmTasks('grunt-couch');
-    grunt.registerTask('default', ['couch-compile:rfs2', 'couch-push:rfs2']);
+    grunt.registerTask('default', ['couch-compile:rfs2', 'couch-push:rfs2-test']);
     grunt.registerTask('local', ['couch-compile:rfs2', 'couch-push:rfs2-local']);
+    grunt.registerTask('deploy', ['couch-compile:rfs2', 'couch-push:rfs2']);
 };

@@ -1,0 +1,18 @@
+<div class="container">
+    <div class="row" style="margin-top:20px">    
+        <ul class="wizard">
+            <li class="step1" role="presentation" ui-sref-active="active"><a ui-sref="wizard.borger">Borger løsning</a></li>
+            <li class="step2" role="presentation" ui-sref-active="active"><a ui-sref="wizard.sagsbehandler">Sagsbehandler løsning</a></li>
+            <li class="step3" role="presentation" ui-sref-active="active"><a ui-sref="wizard.afslut">Afslut</a></li>
+            <li class="step4" role="presentation" ui-sref-active="active"><a ui-sref="wizard.test">Test</a></li>
+        </ul>
+        <div ui-view>
+            <div class="jumbotron">
+                <h1>Wizard</h1>
+                <p>Dette er en wizard til opsætning af indberetningsløsninger til borgere og sagsbehandlere.</p>
+                <button ng-click="next()" class="btn btn-lg btn-warning pull-right">Start</button>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>

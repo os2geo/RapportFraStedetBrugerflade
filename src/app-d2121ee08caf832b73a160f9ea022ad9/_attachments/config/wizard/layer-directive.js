@@ -580,7 +580,8 @@
                     var paletteindex = 3,
                         i;
                     if ($scope.colorbrewer[$scope.selectedPalette].hasOwnProperty(values.length)) {
-                        paletteindex = $scope.layer.styles.length;
+                        //paletteindex = $scope.layer.styles.length;
+                        paletteindex = values.length;
                     } else {
                         var max;
                         for (var key in $scope.colorbrewer[$scope.selectedPalette]) {

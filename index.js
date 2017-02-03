@@ -52,11 +52,11 @@ for (key in tileIndex.tiles) {
 var app = express();
 app.all('/couchdb*', function (req, res) {
     res.set('Access-Control-Allow-Credentials', 'true');
-    res.set('Access-Control-Allow-Origin', 'http://localhost:8100');
+    res.set('Access-Control-Allow-Origin', 'http://localhost:5000');
     res.set('Access-Control-Allow-Methods', 'GET, PUT, POST, HEAD, DELETE');
     res.set('Access-Control-Allow-Headers', 'accept, authorization, content-type, origin, referer');
     //var url = "http://localhost:5984/" + req.url.substring(9);
-    var url = "http://rune%40addin.dk:rutv2327@geo.os2geo.dk/couchdb/" + req.url.substring(9);
+    var url = "http://rune%40addin.dk:rutv2327@test.geo.os2geo.dk/couchdb/" + req.url.substring(9);
     if (req.method === 'PUT') {
         req.pipe(request.put(url)).pipe(res);
     } else if (req.method === 'POST') {
@@ -72,11 +72,11 @@ app.all('/couchdb*', function (req, res) {
 });
 app.all('/api*', function (req, res) {
     res.set('Access-Control-Allow-Credentials', 'true');
-    res.set('Access-Control-Allow-Origin', 'http://localhost:8100');
+    res.set('Access-Control-Allow-Origin', 'http://localhost:5000');
     res.set('Access-Control-Allow-Methods', 'GET, PUT, POST, HEAD, DELETE');
     res.set('Access-Control-Allow-Headers', 'accept, authorization, content-type, origin, referer');
     //var url = "http://localhost:5984/" + req.url.substring(9);
-    var url = "http://rune%40addin.dk:rutv2327@geo.os2geo.dk/api/" + req.url.substring(5);
+    var url = "http://rune%40addin.dk:rutv2327@test.geo.os2geo.dk/api/" + req.url.substring(5);
     if (req.method === 'PUT') {
         req.pipe(request.put(url)).pipe(res);
     } else if (req.method === 'POST') {

@@ -1,0 +1,23 @@
+<div class="jumbotron">
+    <h1>Afslut</h1>
+    <p>Vil du oprette de konfigurerede løsninger i systemet.</p>
+    <button type="button" ng-click="next()" class="btn btn-lg btn-warning pull-right">Opret</button>
+    <div class="clearfix"></div>
+    <ul class="fa-ul" style="font-size:1.3333em" ng-if="opret">
+        <li><i class="fa-li fa fa-lg" ng-class="{'fa-spinner fa-spin':!database, 'fa-check text-success':database}"></i> Opretter database</li>
+        <li><i class="fa-li fa fa-lg" ng-class="{'fa-spinner fa-spin':!schema, 'fa-check text-success':schema}"></i> Opretter skema i database</li>
+        <li><i class="fa-li fa fa-lg" ng-class="{'fa-spinner fa-spin':!straks, 'fa-check text-success':straks}"></i> Opretter indberetningsområde</li>
+        <li><i class="fa-li fa fa-lg" ng-class="{'fa-spinner fa-spin':!borger1, 'fa-check text-success':borger1}"></i> Opretter borger opsætning</li>
+        <li><i class="fa-li fa fa-lg" ng-class="{'fa-spinner fa-spin':!borger2, 'fa-check text-success':borger2}"></i> Opdaterer borger opsætning</li>
+        <li ng-if="wizard.email.borger.send"><i class="fa-li fa fa-lg" ng-class="{'fa-spinner fa-spin':!borgeremail1, 'fa-check text-success':borgeremail1}"></i> Opretter borger email</li>
+        <li ng-if="wizard.email.borger.send"><i class="fa-li fa fa-lg" ng-class="{'fa-spinner fa-spin':!borgeremail2, 'fa-check text-success':borgeremail2}"></i> Opdaterer borger email</li>
+        
+        <li ng-if="wizard.template.sagsbehandler"><i class="fa-li fa fa-lg" ng-class="{'fa-spinner fa-spin':!sagsbehandler1, 'fa-check text-success':sagsbehandler1}"></i> Opretter sagsbehandler opsætning</li>
+        <li ng-if="wizard.template.sagsbehandler"><i class="fa-li fa fa-lg" ng-class="{'fa-spinner fa-spin':!sagsbehandler2, 'fa-check text-success':sagsbehandler2}"></i> Opdaterer sagsbehandler opsætning</li>
+        <li ng-if="wizard.template.sagsbehandler && wizard.email.sagsbehandler.send"><i class="fa-li fa fa-lg" ng-class="{'fa-spinner fa-spin':!sagsbehandleremail1, 'fa-check text-success':sagsbehandleremail1}"></i> Opretter sagsbehandler email</li>
+        <li ng-if="wizard.template.sagsbehandler && wizard.email.sagsbehandler.send"><i class="fa-li fa fa-lg" ng-class="{'fa-spinner fa-spin':!sagsbehandleremail2, 'fa-check text-success':sagsbehandleremail2}"></i> Opdaterer sagsbehandler email</li>                
+    </ul>
+</div>
+<div class="alert alert-danger" role="alert" ng-show="error">
+    <p><strong>Fejl:</strong> {{error}}</p>
+</div>

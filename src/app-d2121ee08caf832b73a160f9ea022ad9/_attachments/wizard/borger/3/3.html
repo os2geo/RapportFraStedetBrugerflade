@@ -1,0 +1,72 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">3. Indberetningsområde</h3>
+    </div>
+    <div class="panel-body">
+        <div class="alert alert-warning" role="alert">
+            <p>Upload GeoJSON fil med område til afgrænsning af hvor der må indberettes.</p>
+            <p>Angiv et navn og en beskrivelse som vises hvis der indberettes forkert i forhold til indberetningsområdet.</p>
+            <p>Angiv om det skal være tilladt at indberette indenfor området ved at sætte flueben i indenfor.</p>
+            <p>Hvis der ikke er flueben i indenfor, så er det kun tilladt at indebrette udenfor området.</p>
+            <p>Det er muligt at oprette flere områder.</p>
+            <p>Områdeinformation kan rettes ved at klikke på området under lag og rette under information.</p>
+        </div>
+        <p>
+            <button type="button" class="btn btn-warning" ng-click="add()">Tilføj indberetningsområde</button>
+        </p>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Kort</h3>
+                    </div>
+                    <div map on-create="mapCreated(map)" style="height:380px;width:100%"></div>
+                </div>
+            </div>
+            <div class="col-md-6" ng-show="wizard.straks">
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Lag</h3>
+                    </div>
+                    <div class="list-group">
+                        <a class="list-group-item" ng-class="{active:key===selectedIndex}" ng-repeat="(key, value) in wizard.straks" ng-click="select(key)">{{value.name}}</a>
+                    </div>
+                </div>
+                <div class="panel panel-default" ng-show="straks">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Information</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <button type="button" class="btn btn-danger" ng-click="delete()">Slet lag</button>
+                        </div>
+                        <div class="form-group has-feedback" ng-class="{ 'has-error': myform.name.$error.required && myform.$submitted, 'has-success': myform.name.$valid && !myform.name.$pristine}">
+                            <label for="name">Navn</label>
+                            <input name="name" ng-model="straks.name" type="text" class="form-control" id="name" placeholder="Navn" required>
+                            <span ng-show="myform.name.$valid && !myform.name.$pristine" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                            <span ng-show="myform.name.$error.required && myform.$submitted" class="help-block">Navn er påkrævet!</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Beskrivelse</label>
+                            <textarea name="description" ng-model="straks.description" class="form-control" id="description"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="link">Link</label>
+                            <input type="url" name="link" ng-model="straks.link" class="form-control" id="link">
+                        </div>
+                        <div class="form-group">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" ng-model="straks.inside"> Indenfor
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a ui-sref="wizard.borger.2" class="btn btn-success">Forrige</a>
+        <button ng-click="next()" type="button" class="btn btn-success pull-right">Næste</button>
+    </div>
+</div>

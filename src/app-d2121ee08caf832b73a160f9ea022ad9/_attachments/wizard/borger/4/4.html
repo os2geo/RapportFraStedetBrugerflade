@@ -1,0 +1,55 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">4. Billeder</h3>
+    </div>
+    <div class="panel-body">
+        <div class="alert alert-warning" role="alert">
+            <p>Angiv om der skal kunne indberettes billeder.</p>
+            <p><strong>Name</strong> angiver feltnavnet i databasen. (F.eks.: Billede)</p>
+            <p><strong>Title</strong> angiver den viste titel. Hvis der ikke angives en titel, så bruges <strong>Name</strong> som titel. (F.eks.: Vedhæft evt. et billede til din henvendelse)</p>
+            <p><strong>Required</strong> angiver om det er påkrævet at indberette billede.</p>
+             <p><strong>Formular</strong> Tillad upload af billede i indberetningsformular.</p>
+            <p><strong>Popup/Liste</strong> Vis billedet i popup viduet i kortet og liste visningen for borgeren.</p>
+        </div>
+        <p>
+            <button type="button" class="btn btn-warning" ng-click="addAttachment()">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Tilføj
+                    </button>
+        </p>
+
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th>Name</th>
+                        <th>Title</th>
+                        <th>Required</th>
+                        <th>Formular</th>
+                        <th>Popup/Liste</th>
+                    </tr>
+                </thead>
+                <tbody ui-sortable ng-model="wizard.attachments.borger">
+                    <tr ng-repeat="field in wizard.attachments.borger">
+                        <td>
+                            <span class="glyphicon glyphicon-sort" aria-hidden="true"></span>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-default btn-sm" ng-click="removeAttachment(field)">
+                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                </button>
+                        </td>
+                        <td><input type="text" class="form-control" ng-model="field.name" ng-change="attachmentNameChanged(field)"></td>
+                        <td><input type="text" class="form-control" ng-model="field.title" ng-change="attachmentTitleChanged(field)"></td>
+                        <td><input type="checkbox" ng-model="field.required" ng-change="attachmentRequiredChanged(field)"></td>
+                        <td><input type="checkbox" ng-model="field.form"></td>
+                        <td><input type="checkbox" ng-model="field.list"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <a ui-sref="wizard.borger.3" class="btn btn-success">Forrige</a>
+        <button ng-click="next()" type="button" class="btn btn-success pull-right">Næste</button>
+    </div>
+</div>

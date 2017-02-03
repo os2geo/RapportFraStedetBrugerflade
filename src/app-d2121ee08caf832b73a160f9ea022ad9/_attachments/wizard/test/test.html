@@ -1,0 +1,11 @@
+<div class="jumbotron">
+    <h1>Test</h1>
+    <p>Konfigurationerne er oprettet i systemet.</p>
+    <p>Du kan nu teste dem via nedenstående links.</p>
+    <p><a target="_blank" ng-href="{{borgerapp}}">Borgerløsning i app</a></p>
+    <p ng-if="wizard.template.sagsbehandler"><a target="_blank" ng-href="{{sagsbehandlerapp}}">Sagsbehandlerløsning i app</a></p>
+    <p>Du ændre opsætningen via nedenstående links.</p>
+    <p><a target="_blank" ng-href="{{borger}}">Borgerløsning opsætning</a></p>
+    <p ng-if="wizard.template.sagsbehandler"><a target="_blank" ng-href="{{sagsbehandler}}">Sagsbehandlerløsning opsætning</a></p>
+    <button ng-click="next()" type="button" class="btn btn-lg btn-success">Kør wizard igen</button>
+</div>

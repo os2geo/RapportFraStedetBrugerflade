@@ -1,0 +1,55 @@
+<div class="row" style="margin-top:20px">
+    <div class="col-sm-3">
+
+        <!-- List group -->
+        <ul class="list-group">
+            <li class="list-group-item" ui-sref-active="active">
+                <a ng-if="wizard.step.sagsbehandler>0" ui-sref="wizard.sagsbehandler.1">1. Vælg skabelon</a>
+                <span ng-if="wizard.step.sagsbehandler<1">1. Vælg skabelon</span>
+            </li>
+            <li class="list-group-item" ui-sref-active="active">
+                <a ng-if="wizard.step.sagsbehandler>1" ui-sref="wizard.sagsbehandler.2">2. Sikkerhed</a>
+                <span ng-if="wizard.step.sagsbehandler<2">2. Sikkerhed</span>
+            </li>
+            <li class="list-group-item" ui-sref-active="active">
+                <a ng-if="wizard.step.sagsbehandler>2" ui-sref="wizard.sagsbehandler.3">3. Billeder</a>
+                <span ng-if="wizard.step.sagsbehandler<3">3. Billeder</span>
+            </li>
+            <li class="list-group-item" ui-sref-active="active">
+                <a ng-if="wizard.step.sagsbehandler>3" ui-sref="wizard.sagsbehandler.4">4. Formular</a>
+                <span ng-if="wizard.step.sagsbehandler<4">4. Formular</span>
+            </li>
+            <li class="list-group-item" ui-sref-active="active">
+                <a ng-if="wizard.step.sagsbehandler>4" ui-sref="wizard.sagsbehandler.5">5. Email</a>
+                <span ng-if="wizard.step.sagsbehandler<5">5. Email</span>
+            </li>
+            <li ng-if="wizard.email.sagsbehandler.send" class="list-group-item" ui-sref-active="active">
+                <a ng-if="wizard.step.sagsbehandler>5" ui-sref="wizard.sagsbehandler.5.1">5.1 Opsætning</a>
+                <span ng-if="wizard.step.sagsbehandler<5.1">5.1 Opsætning</span>
+            </li>
+            <li ng-if="wizard.email.sagsbehandler.send" class="list-group-item" ui-sref-active="active">
+                <a ng-if="wizard.step.sagsbehandler>5.1" ui-sref="wizard.sagsbehandler.5.2">5.2 Sagsbehandlere</a>
+                <span ng-if="wizard.step.sagsbehandler<5.2">5.1 Sagsbehandlere</span>
+            </li>
+            <li class="list-group-item" ui-sref-active="active">
+                <a ng-if="wizard.step.sagsbehandler>5.9" ui-sref="wizard.sagsbehandler.6">6. Baggrundskort</a>
+                <span ng-if="wizard.step.sagsbehandler<6">6. Baggrundskort</span>
+            </li>
+            <li class="list-group-item" ui-sref-active="active">
+                <a ng-if="wizard.step.sagsbehandler>6" ui-sref="wizard.sagsbehandler.7">7. Lag</a>
+                <span ng-if="wizard.step.sagsbehandler<7">7. Lag</span>
+            </li>
+        </ul>
+    </div>
+    <div class="col-sm-9">
+        <div ui-view>
+            <div class="jumbotron">
+                <h1>Sagsbehandler løsning</h1>
+                <p>Vil du oprette en sagsbehandler løsning?</p>
+                <button ng-click="yes()" type="button" class="btn btn-lg btn-success pull-right">Ja</button>
+                <button ng-click="no()" type="button" class="btn btn-lg btn-warning pull-right" style="margin-right:10px">Nej</button>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>

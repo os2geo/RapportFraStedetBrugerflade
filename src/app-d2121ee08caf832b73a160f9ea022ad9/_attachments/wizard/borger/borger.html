@@ -1,0 +1,54 @@
+<div class="row" style="margin-top:20px">
+    <div class="col-sm-3">
+
+        <!-- List group -->
+        <ul class="list-group">
+            <li class="list-group-item" ui-sref-active="active">
+                <a ng-if="wizard.step.borger>0" ui-sref="wizard.borger.1">1. Vælg skabelon</a>
+                <span ng-if="wizard.step.borger<1">1. Vælg skabelon</span>
+            </li>
+            <li class="list-group-item" ui-sref-active="active">
+                <a ng-if="wizard.step.borger>1" ui-sref="wizard.borger.2">2. Tilladt geometri type</a>
+                <span ng-if="wizard.step.borger<2">2. Geometri</span>
+            </li>
+            <li class="list-group-item" ui-sref-active="active">
+                <a ng-if="wizard.step.borger>2" ui-sref="wizard.borger.3">3. Indberetningsområde</a>
+                <span ng-if="wizard.step.borger<3">3. Indberetningsområde</span>
+            </li>
+            <li class="list-group-item" ui-sref-active="active">
+                <a ng-if="wizard.step.borger>3" ui-sref="wizard.borger.4">4. Billeder</a>
+                <span ng-if="wizard.step.borger<4">4. Billeder</span>
+            </li>
+            <li class="list-group-item" ui-sref-active="active">
+                <a ng-if="wizard.step.borger>4" ui-sref="wizard.borger.5">5. Formular</a>
+                <span ng-if="wizard.step.borger<5">5. Formular</span>
+            </li>
+            <li class="list-group-item" ui-sref-active="active">
+                <a ng-if="wizard.step.borger>5" ui-sref="wizard.borger.6">6. Email</a>
+                <span ng-if="wizard.step.borger<6">6. Email</span>
+            </li>
+            <li ng-if="wizard.email.borger.send" class="list-group-item" ui-sref-active="active">
+                <a ng-if="wizard.step.borger>6" ui-sref="wizard.borger.6.1">6.1 Opsætning</a>
+                <span ng-if="wizard.step.borger<6.1">6.1 Opsætning</span>
+            </li>
+            <li class="list-group-item" ui-sref-active="active">
+                <a ng-if="wizard.step.borger>6.9" ui-sref="wizard.borger.7">7. Baggrundskort</a>
+                <span ng-if="wizard.step.borger<7">7. Baggrundskort</span>
+            </li>
+            <li class="list-group-item" ui-sref-active="active">
+                <a ng-if="wizard.step.borger>7" ui-sref="wizard.borger.8">8. Lag</a>
+                <span ng-if="wizard.step.borger<8">8. Lag</span>
+            </li>
+        </ul>
+    </div>
+    <div class="col-sm-9">
+        <div ui-view>
+            <div class="jumbotron">
+                <h1>Borger løsning</h1>
+                <p>Du bliver i de følgende trin guidet igennem opsætning af en ny løsning til borgerindberetninger</p>
+                <button type="button" ng-click="next()" class="btn btn-lg btn-warning pull-right">Start</button>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>

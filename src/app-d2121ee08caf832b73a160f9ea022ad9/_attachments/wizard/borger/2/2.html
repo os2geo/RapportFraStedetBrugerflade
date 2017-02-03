@@ -1,0 +1,53 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">3. Geometri</h3>
+    </div>
+    <div class="panel-body">
+        <div class="alert alert-warning" role="alert">
+            <p>Angiv hvilke typer af geometri som må indberettes.</p>
+        </div>
+        
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="checkbox">
+                    <label>
+                                <input type="checkbox" ng-model="Point" ng-change="pointChanged()"> Point
+                            </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                                <input type="checkbox" ng-model="LineString" ng-change="lineStringChanged()"> LineString
+                            </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                                <input type="checkbox" ng-model="Polygon" ng-change="polygonChanged()"> Polygon
+                            </label>
+                </div>
+            </div>
+            <!--div class="col-sm-6">
+                <div class="checkbox">
+                    <label>
+                                <input type="checkbox" ng-model="MultiPoint" ng-change="multiPointChanged()"> MultiPoint
+                            </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                                <input type="checkbox" ng-model="MultiLineString" ng-change="multiLineStringChanged()"> MultiLineString
+                            </label>
+                </div>
+
+                <div class="checkbox">
+                    <label>
+                                <input type="checkbox" ng-model="MultiPolygon" ng-change="multiPolygonChanged()"> MultiPolygon
+                            </label>
+                </div>
+            </div>
+            <div class="alert alert-danger" role="alert" ng-show="error">
+                <p><strong>Fejl:</strong> {{error}}</p>
+            </div-->
+        </div>
+        <a ui-sref="wizard.borger.1" class="btn btn-success">Forrige</a>
+        <button ng-click="next()"type="button" class="btn btn-success pull-right">Næste</button>
+    </div>
+</div>

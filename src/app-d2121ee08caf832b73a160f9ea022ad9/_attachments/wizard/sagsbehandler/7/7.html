@@ -1,0 +1,50 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">7. Lag</h3>
+    </div>
+    <div class="panel-body">
+        <div class="alert alert-warning" role="alert">
+            <p>Tilføj eksisterende lag til sagsbehandlerløsning.</p>
+            <p>⚬ angiver egne skabeloner.</p>
+            <p>⚭ angiver fælles skabeloner.</p>
+            <p>Angiv om laget skal vises i kortet fra start af.</p>
+        </div>
+        <p>
+            <button type="button" class="btn btn-warning" ng-click="addOverlay()">Tilføj lag</button>
+        </p>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th>Navn</th>
+                        <th>Skabelon</th>
+                        <th>Lag</th>
+                        <th>Vis ved opstart</th>
+                    </tr>
+                </thead>
+                <tbody ui-sortable="sortableOptions" ng-model="wizard.overlays.sagsbehandler">
+                    <tr ng-repeat="item in wizard.overlays.sagsbehandler">
+                        <td>
+                            <span class="glyphicon glyphicon-sort" aria-hidden="true"></span>
+                        </td>
+                        <td>
+                            <button ng-if="wizard.template.sagsbehandler.overlay.id!==item.overlay.id" type="button" class="btn btn-default btn-sm" ng-click="removeOverlay(item)">
+                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                        </button>
+                        </td>
+                        <td><input type="text" class="form-control" ng-model="item.name"></td>
+                        <td>{{item.configuration.name}}</td>
+                        <td>{{item.overlay.name}}</td>
+                        <td><input type="checkbox" ng-model="item.overlay.selected"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <a ui-sref="wizard.sagsbehandler.6" class="btn btn-success">Forrige</a>
+        <button ng-click="next()" type="button" class="btn btn-success pull-right">Næste</button>
+
+    </div>
+</div>
+</div>

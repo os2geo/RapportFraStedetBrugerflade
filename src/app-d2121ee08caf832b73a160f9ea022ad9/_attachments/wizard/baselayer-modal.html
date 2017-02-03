@@ -1,0 +1,55 @@
+<form novalidate class="form-horizontal" role="form" name="myform" ng-submit="submit(myform)">
+    <div class="modal-header">
+        <h3 class="modal-title">Tilføj eksisterende baggrundskort</h3>
+    </div>
+    <div class="modal-body">
+
+        <div class="form-group has-feedback" ng-class="{ 'has-error': myform.name.$error.required && myform.$submitted, 'has-success': myform.name.$valid && myform.$submitted}">
+            <label for="name" class="col-sm-2 control-label">Navn</label>
+            <div class="col-sm-10">
+                <input name="name" ng-model="doc.name" type="text" class="form-control" id="name" placeholder="Navn" required>
+                <span ng-show="myform.name.$valid && !myform.name.$pristine" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                <span ng-show="myform.name.$error.required && myform.$submitted" class="help-block">Navn er påkrævet!</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <div class="checkbox">
+                    <label>
+                            <input type="checkbox" ng-model="doc.showCommon" ng-change="showCommonChanged()">Vis fælles skabeloner
+                        </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group has-feedback" ng-class="{ 'has-error': myform.configuration.$error.required && myform.$submitted, 'has-success': myform.configuration.$valid && myform.$submitted}">
+            <label for="configuration" class="col-sm-2 control-label">Skabelon</label>
+            <div class="col-sm-10">
+                <select name="configuration" id="configuration" class="form-control" ng-model="doc.configuration" ng-options="item as item.doc.name for item in doc.configurations track by item.id"
+                    ng-change="configurationChanged(item)" required>
+                    <option value="">-- Vælg skabelon --</option>
+                </select>
+                <span ng-show="myform.configuration.$valid && !myform.email.$pristine" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                <span ng-show="myform.configuration.$error.required && myform.$submitted" class="help-block">Opsætning er påkrævet!</span>
+
+            </div>
+        </div>
+        <div class="form-group has-feedback" ng-class="{ 'has-error': myform.overlay.$error.required && myform.$submitted, 'has-success': myform.overlay.$valid && myform.$submitted}">
+            <label for="overlay" class="col-sm-2 control-label">Baggrundskort</label>
+            <div class="col-sm-10">
+                <select name="overlay" id="overlay" class="form-control" ng-model="doc.overlay" ng-options="item as item.name for item in doc.overlays" ng-change="overlayChanged()"
+                    required>
+                    <option value="">-- Vælg baggrundskort --</option>
+                </select>
+                <span ng-show="myform.overlay.$valid && !myform.email.$pristine" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                <span ng-show="myform.overlay.$error.required && myform.$submitted" class="help-block">Baggrundskort er påkrævet!</span>
+            </div>
+        </div>
+
+
+
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-warning" ng-click="cancel()">Fortryd</button>
+        <button type="submit" class="btn btn-primary">OK</button>
+    </div>
+</form>

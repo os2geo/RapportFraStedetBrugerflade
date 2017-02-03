@@ -1,0 +1,49 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">2. Sikkerhed</h3>
+    </div>
+    <div class="panel-body">
+        <div class="alert alert-warning" role="alert">
+            <p>Vælg brugere som må redigere indberetninger, der kræves hermed login. Hvis der ikke er valgt nogle brugere, så
+                må alle redigere indberetninger og der kræves ikke login.</p>
+        </div>
+
+        <div class="alert alert-success alert-dismissible" role="alert" ng-show="success">
+            <button type="button" class="close" ng-click="success=null"><span aria-hidden="true">&times;</span><span class="sr-only">Luk</span>
+                    </button><strong>OK:</strong> {{success}}.
+        </div>
+        <div class="alert alert-danger alert-dismissible" role="alert" ng-show="error">
+            <button type="button" class="close" ng-click="error=null"><span aria-hidden="true">&times;</span><span class="sr-only">Luk</span>
+                    </button><strong>Fejl:</strong> {{error}}
+        </div>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Tillad</th>
+                    <th>Bruger</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="(key,value) in users">
+                    <td>
+                        <input type="checkbox" ng-change="change()" ng-model="users[key]">
+                    </td>
+                    <td>{{key}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" ng-model="wizard.template.sagsbehandler.overlay.allowEditGeometry"> Tillad redigering af geometri
+            </label>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" ng-model="wizard.template.sagsbehandler.overlay.allowRemove"> Tillad sletning af indberetning
+            </label>
+        </div>
+        <a ui-sref="wizard.sagsbehandler.1" class="btn btn-success">Forrige</a>
+        <button ng-click="next()" type="button" class="btn btn-success pull-right">Næste</button>
+    </div>
+</div>
